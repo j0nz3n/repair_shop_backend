@@ -46,6 +46,6 @@ class RepairOrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def repair_order_params
-      params.require(:repair_order).permit(:device_id_id, :user_id_id, :date_in, :date_due, :date_out, :complaint, :diagnosis, :repair_action, :user_rating)
+      params.require(:repair_order).permit(:device_id, :user_id, :date_in, :date_due, :date_out, :complaint, :diagnosis, :repair_action, :user_rating)
     end
 end
