@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2) do
+ActiveRecord::Schema.define(version: 20180720005238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "devices", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "make", null: false
+    t.string "model", null: false
+    t.string "serial_number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_devices_on_user_id"
+  end
 
   create_table "examples", force: :cascade do |t|
     t.text "text", null: false
@@ -21,6 +31,22 @@ ActiveRecord::Schema.define(version: 2) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_examples_on_user_id"
+  end
+
+  create_table "repair_orders", force: :cascade do |t|
+    t.bigint "device_id"
+    t.bigint "user_id"
+    t.date "date_in"
+    t.date "date_due"
+    t.date "date_out"
+    t.text "complaint"
+    t.text "diagnosis"
+    t.text "repair_action"
+    t.integer "user_rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_repair_orders_on_device_id"
+    t.index ["user_id"], name: "index_repair_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,5 +59,8 @@ ActiveRecord::Schema.define(version: 2) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "devices", "users"
   add_foreign_key "examples", "users"
+  add_foreign_key "repair_orders", "devices"
+  add_foreign_key "repair_orders", "users"
 end

@@ -9,3 +9,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+users = User.create([{ email: 'jane@email.com', password:'12' }, { email: 'nelly@email.com', password:'12' }, { email: 'ari@email.com', password:'12' }])
+devices = Device.create([{ user_id: 1, make:'Apple', model:'MacBook Air 7,2', serial_number: 'C02PHEZ3G941'}, { user_id: 1, make:'Apple', model:'MacBook Air 7,2', serial_number: 'C02PHEZ324r231'}])
