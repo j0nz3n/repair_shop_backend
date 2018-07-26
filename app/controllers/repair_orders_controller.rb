@@ -1,4 +1,4 @@
-class RepairOrdersController < ApplicationController
+class RepairOrdersController < OpenReadController
   before_action :set_repair_order, only: [:show, :update, :destroy]
 
   # GET /repair_orders
@@ -15,7 +15,8 @@ class RepairOrdersController < ApplicationController
 
   # POST /repair_orders
   def create
-    @repair_order = RepairOrder.new(repair_order_params)
+    # @repair_order = RepairOrder.new(repair_order_params)
+    @repair_order = current_user.repair_orders.build(repair_order_params)
 
     if @repair_order.save
       render json: @repair_order, status: :created, location: @repair_order

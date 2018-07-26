@@ -1,4 +1,4 @@
-class DevicesController < ApplicationController
+class DevicesController < OpenReadController
   before_action :set_device, only: [:show, :update, :destroy]
 
   # GET /devices
@@ -15,8 +15,9 @@ class DevicesController < ApplicationController
 
   # POST /devices
   def create
-    @device = Device.new(device_params)
-
+    # @device = Device.new(device_params)
+    @device = current_user.devices.build(device_params)
+    
     if @device.save
       render json: @device, status: :created, location: @device
     else
