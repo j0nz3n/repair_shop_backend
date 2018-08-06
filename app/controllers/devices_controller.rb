@@ -2,15 +2,15 @@ class DevicesController < OpenReadController
   before_action :set_device, only: [:show, :update, :destroy]
 
   # GET /devices
-  def index
+  def index()
+    # Device.fidb by id? to only respond with the devices for the current user
     @devices = Device.all
-
     render json: @devices
   end
-
-  # GET /devices/1
-  def show
-    render json: @device
+  
+    # GET /devices/1
+  def show()
+    render json: @devices
   end
 
   # POST /devices
